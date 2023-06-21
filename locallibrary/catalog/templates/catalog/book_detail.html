@@ -1,0 +1,75 @@
+{% extends "base_generic.html" %}
+
+{% block title %} <title>{{ book.title }}</title> {% endblock %}
+
+{% block content %}
+  <h1>Title: {{ book.title }} </h1>
+
+  <p><strong>Summary:</strong> {{ book.Summary }} </p>
+  <hr>
+  <p><strong>ISBN:</strong> {{ book.isbn }} </p>
+  <p><strong>Language:</strong> {{ book.language }} </p>
+  <p><strong>Genre:</strong> {{ book.genre.all|join:"," }} </p>
+
+  <div style="margin-left: 20px; margin-top: 20px;">
+
+    <h4><em>Copies</em></h4>
+    {% for copy in book.bookinstance_set.all %}
+
+      <!-- copy = every BookInstance's record -->
+      <!-- _set =  a reverse lookup class(similar to a funtion)
+        variable django puts in for you. -->
+      <hr>
+      <p class=" {% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+        {{ copy.get_status_display }}
+      </p>
+
+      {% if copy.status != 'a' %}
+        <p><strong>Due to be returned: </strong>
+          {{ copy.due_back }} 
+        </p>
+      {% endif %}
+
+      <p><strong>Imprint: </strong>{{ copy.imprint }}</p>
+
+      <p class="text-muted"><strong>Id: </strong> {{ copy.id }} </p>
+
+    {% endfor %}
+
+  </div>
+  <hr>
+  <table>
+    <tr>
+      <td>
+        {% if perms.catalog.can_change_book %}
+          <button><a href=" {{ book.get_id_update }} "> Update </a></button>
+        {% endif %}
+      </td>
+
+      <td>
+        {% if perms.catalog.can_delete_boo %}
+          <button><a href=" {{ book.get_id_delete }}">Delete</a></button>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+{% endblock %}
+
+
+<!-- book.genre.all|join: -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

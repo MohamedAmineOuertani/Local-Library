@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block title %} <title>The Local Library </title> {% endblock %}
+
+
+{% block content %}
+  <h1 style="text-align: center;">Local Library Home</h1>
+  <hr>
+  <p>Welcome to LocalLibrary, a Huge Webside Project developed by <em style="font-style:italic ;font-family:cursive "><strong>Mohamed Amine Ouerteni</strong> </em>.</p>
+  <h2><em>Available Staff</em></h2>
+  <p>The Library has the flowing record counts</p>
+    <ul>
+        <li> <strong>Books: </strong> {{ num_books }} </li>
+        <li> <strong>Copies: </strong> {{ num_instances }} </li>
+        <li> <strong>Available Copies: </strong> {{ num_instances_Available }} </li>
+        <li> <strong>Authors: </strong> {{ num_author }} </li>
+    </ul>
+  <p><em>You have visited this page {{ num_visits }} Time{{ num_visits|pluralize }}.</em></p>
+
+{% endblock %}
+
+

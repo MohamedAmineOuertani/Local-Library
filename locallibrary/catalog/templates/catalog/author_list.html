@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block title %} <title>List of Authors</title> {% endblock %}
+
+{% block content %}
+  
+  <h1><strong>Authors</strong></h1>
+  {% if author_list %}
+  <ul>
+    {% for author in author_list %}
+     <li>
+         <a href="{{ author.get_absolute_url }}"> {{ author }} </a> 
+         ({{ author.date_of_birth }} - {{ author.date_of_Death }})
+     </li>
+    {% endfor  %}
+   </ul>
+  {% else %} 
+    <p>There is no Authors, We will add them as soon as they'r availeble</p>
+    
+  {% endif %}
+  {% if perms.catalog.can_add_author %}
+  <button style="color: green" ><a href=" {% url 'author-create' %} ">Create</a></button> 
+  {% endif %}
+  
+{%endblock %}
